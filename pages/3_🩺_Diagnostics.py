@@ -33,7 +33,7 @@ st.set_page_config(
 # Models
 classes = ["artifact", "healthy", "abnormal"]
 uno_session = PredictionSession("cardionetv2uno.onnx", classes=classes)
-multimodal_session = PredictionSession("cardionetv2multi.onnx", classes=classes)
+# multimodal_session = PredictionSession("cardionetv2multi.onnx", classes=classes) # TODO: refit or del model
 
 # Data loading and preprocessing
 audio_widget = AudioWidget(min_duration=20, max_duration=60)
@@ -103,21 +103,22 @@ def load_audio() -> np.ndarray:
 
 
 def predict(audio: np.ndarray) -> dict[str, float]:
-    is_multimodal = st.radio(
-        label="Do you want to fill out a medical card?",
-        options=["Default", "Yes", "No"],
-        help="More information about your health can significantly improve your prognosis."
-    )
+    #is_multimodal = st.radio(
+    #    label="Do you want to fill out a medical card?",
+    #    options=["Default", "Yes", "No"],
+    #    help="More information about your health can significantly improve your prognosis."
+    #)
 
-    if is_multimodal.lower() == "no":
-        with st.spinner("Please wait... We examine your heart 🫀"):
-            return uno_session(audio)
-    if is_multimodal.lower() == "yes":
-        form = ExtraForm()
-        if (tabular := form.get_all_form()) is not None:
-            tabular = tabular_preprocessor(**tabular)
-            with st.spinner("Please wait... We examine your heart 🫀"):
-                return multimodal_session(audio, tabular)
+    #if is_multimodal.lower() == "no":
+     with st.spinner("Please wait... We examine your heart 🫀"):
+        return uno_session(audio)
+    
+    #if is_multimodal.lower() == "yes":
+    #    form = ExtraForm()
+    #    if (tabular := form.get_all_form()) is not None:
+    #        tabular = tabular_preprocessor(**tabular)
+    #        with st.spinner("Please wait... We examine your heart 🫀"):
+    #            return multimodal_session(audio, tabular)
 
 
 if (audio := load_audio()) is not None:
