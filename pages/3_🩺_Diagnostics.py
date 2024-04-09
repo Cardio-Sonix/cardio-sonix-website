@@ -36,7 +36,7 @@ uno_session = PredictionSession("cardionetv2uno.onnx", classes=classes)
 # multimodal_session = PredictionSession("cardionetv2multi.onnx", classes=classes) # TODO: refit or del model
 
 # Data loading and preprocessing
-audio_widget = AudioWidget(min_duration=20, max_duration=60)
+audio_widget = AudioWidget(min_duration=10, max_duration=60)
 tabular_preprocessor = TabularPreprocessor()
 audio_preprocessor = AudioPreprocessor(duration=20, n_mels=128, n_mfcc=128)
 
