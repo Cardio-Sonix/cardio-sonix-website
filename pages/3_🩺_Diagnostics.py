@@ -57,8 +57,9 @@ def plot_predictions(predict: dict[str, float]) -> None:
 
 def get_indicates(predicted: str) -> str:
     if predicted.lower() in ["healthy", "normal"]:
-        return "deviations from the norm, which can be either symptoms of serious heart disease or a temporary phenomenon"
-    return "the absence of deviations from the norm in the cardiovascular system"
+        return "the absence of deviations from the norm in the cardiovascular system"
+    return "deviations from the norm, which can be either symptoms of serious heart disease or a temporary phenomenon"
+    
 
 
 def classification_report(predicted: str, prob: float) -> None:
